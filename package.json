@@ -1,0 +1,39 @@
+{
+  "name": "koa-superstruct",
+  "version": "1.0.0",
+  "description": "Use the superstruct data validation library as middleware for your koa app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timwis/koa-superstruct.git"
+  },
+  "keywords": [
+    "koa",
+    "superstruct",
+    "validation",
+    "validator"
+  ],
+  "author": "timwis <tim@timwis.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timwis/koa-superstruct/issues"
+  },
+  "homepage": "https://github.com/timwis/koa-superstruct#readme",
+  "dependencies": {
+    "superstruct": "^0.5.0"
+  },
+  "devDependencies": {
+    "jest": "^22.2.2",
+    "standard": "^10.0.3"
+  },
+  "standard": {
+    "globals": [
+      "test",
+      "expect",
+      "jest"
+    ]
+  }
+}
