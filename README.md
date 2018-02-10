@@ -3,9 +3,10 @@ Use the [superstruct][superstruct] data validation library as middleware for you
 
 ## usage
 ```javascript
+const { struct } = require('superstruct')
 const validate = require('koa-superstruct')
 
-const schema = {
+const schema = struct({
   id: 'number',
   title: 'string',
   isPublished: 'boolean?',
@@ -13,7 +14,7 @@ const schema = {
   author: {
     id: 'number'
   }
-}
+})
 
 router.post('/entry', validate(schema), handler)
 ```
@@ -26,6 +27,7 @@ If validation fails, it throws an HTTP 422 error (Unprocessable Entity) with des
 ```bash
 npm install koa-superstruct
 ```
+Install `superstruct` separately, allowing you to pass custom types and avoid peer dependency.
 
 [superstruct]: https://github.com/ianstormtaylor/superstruct
 [koa]: https://github.com/koajs/koa

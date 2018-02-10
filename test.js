@@ -1,10 +1,11 @@
+const { struct } = require('superstruct')
 const validate = require('./index')
 
-const schema = {
+const schema = struct({
   id: 'number',
   title: 'string',
   description: 'string'
-}
+})
 
 test('Returns middleware function', () => {
   const validator = validate({})
