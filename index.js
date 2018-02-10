@@ -9,9 +9,10 @@ module.exports = function (model) {
 
     try {
       model(data)
-      await next()
     } catch (err) {
       ctx.throw(422, err)
+      return
     }
+    await next()
   }
 }
