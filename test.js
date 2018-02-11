@@ -1,12 +1,6 @@
 const { struct } = require('superstruct')
 const validate = require('./index')
 
-const schema = struct({
-  id: 'number',
-  title: 'string',
-  description: 'string'
-})
-
 test('Returns middleware function', () => {
   const validator = validate({})
   expect(typeof validator).toBe('function')
@@ -14,6 +8,13 @@ test('Returns middleware function', () => {
 })
 
 test('calls next when it validates', () => {
+  const schema = struct({
+    body: {
+      id: 'number',
+      title: 'string',
+      description: 'string'
+    }
+  })
   const validator = validate(schema)
   const next = jest.fn()
   const ctx = { request: {} }
@@ -27,6 +28,13 @@ test('calls next when it validates', () => {
 })
 
 test('calls ctx.throw and not next when validation fails', () => {
+  const schema = struct({
+    body: {
+      id: 'number',
+      title: 'string',
+      description: 'string'
+    }
+  })
   const validator = validate(schema)
   const next = jest.fn()
   const ctx = { request: {} }
@@ -39,13 +47,20 @@ test('calls ctx.throw and not next when validation fails', () => {
   expect(next).not.toBeCalled()
 })
 
-test('merges query, body, params', () => {
+test('supports query, body, params, headers', () => {
+  const schema = struct({
+    query: { page: 'number' },
+    body: { title: 'string' },
+    params: { slug: 'string' },
+    headers: { 'X-Foo': 'string' }
+  })
   const validator = validate(schema)
   const next = jest.fn()
   const ctx = { request: {} }
-  ctx.request.query = { id: 1 }
+  ctx.request.query = { page: 2 }
   ctx.request.body = { title: 'foo' }
-  ctx.params = { description: 'bar' }
+  ctx.params = { slug: 'foo-bar' }
+  ctx.request.headers = { 'X-Foo': 'bar' }
   validator(ctx, next)
   expect(next).toBeCalled()
 })

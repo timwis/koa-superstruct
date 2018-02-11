@@ -1,11 +1,12 @@
 module.exports = function (model) {
+  const keysToValidate = Object.keys(model.schema || {})
+
   return async function validate (ctx, next) {
-    const data = Object.assign(
-      {},
-      ctx.request.query,
-      ctx.request.body,
-      ctx.params
-    )
+    const data = {}
+    for (let i = 0; i < keysToValidate.length; i++) {
+      const key = keysToValidate[i]
+      data[key] = ctx.request[key] || ctx[key] // ctx.params is outside request namespace
+    }
 
     try {
       model(data)
