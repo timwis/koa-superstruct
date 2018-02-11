@@ -35,6 +35,7 @@ Install `superstruct` separately, allowing you to pass custom types and avoid pe
 
 ### `validate`
 `validate(schema: Function) => Function`
+
 Accepts a [Struct validator function][validator-function]. The top-level keys should map to koa's [`ctx.request` object][request-object] (ex. `body`, `query`, `headers`) and, failing that, to the `ctx` object (ex. `ctx.params`).
 
 ```javascript
